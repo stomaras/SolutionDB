@@ -53,6 +53,8 @@ namespace SolutionDBFinalApp.Controllers
         public ActionResult Create()
         {
             ViewBag.ProjectId = new SelectList(db.Projects, "ProjectId", "ProjectName");
+            GetManagers();
+            GetProjects();
             return View();
         }
 
@@ -61,16 +63,18 @@ namespace SolutionDBFinalApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,ProjectId")] Employee employee)
+        public ActionResult Create(Employee employee)
         {
             if (ModelState.IsValid)
             {
+                companyUnit.Employees.Add(employee);
                 db.Employees.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProjectId = new SelectList(db.Projects, "ProjectId", "ProjectName", employee.ProjectId);
+            GetProjects();
+            GetManagers();
             return View(employee);
         }
 

@@ -1,51 +1,81 @@
 ﻿@model Entities.Employee
+@using Entities.Enums
+@using Entities
 
 @{
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create Employee Form</h2>
 
-@using (Html.BeginForm()) 
-{
+<form method="post">
+
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Employee</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProjectId, "ProjectId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ProjectId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ProjectId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName)
+        @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Give your first name" } })
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName)
+        @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Give your last name" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.HireDate)
+        @Html.EditorFor(m => m.HireDate, new { htmlAttributes = new { @class = "form-control", type = "date", placeholder = "Give Hire Date" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DateOfBirth)
+        @Html.EditorFor(m => m.DateOfBirth, new { htmlAttributes = new { @class = "form-control", type = "date", placeholder = "Give Birth Date" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Salary)
+        @Html.EditorFor(m => m.Salary, new { htmlAttributes = new { @class = "form-control", type = "number", placeholder = "Give Salary" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Country)
+        @Html.EnumDropDownListFor(m => m.Country, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PhotoUrl)
+        @Html.EditorFor(m => m.PhotoUrl, new { htmlAttributes = new { @class = "form-control", type = "url", placeholder = "Give your image" } })
+    </div>
+
+    <div class="form-group">
+        <label for="project">Select Project</label>
+        <select id="project" name="ProjectId" class="form-control">
+
+            @foreach (var project in ViewBag.Projects as List<Project>)
+            {
+                <option value="@project.ProjectId">@project.ProjectName</option>
+            }
+
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="managers">Select Manager</label>
+        <select id="managers" name="managerIds" class="form-control" multiple>
+
+            @foreach (var manager in ViewBag.Managers as List<Manager>)
+            {
+                <option value="@manager.ManagerId">@manager.FirstName @manager.LastName</option>
+            }
+
+        </select>
+    </div>
+
+
+
+
+
+
+</form>
+
+

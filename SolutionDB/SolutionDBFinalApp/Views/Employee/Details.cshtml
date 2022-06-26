@@ -12,7 +12,14 @@
     <dl class="dl-horizontal">
 
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+            Photo:
+        </dt>
+        <dd>
+            <img width="90" src="@Model.PhotoUrl" />
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName):
         </dt>
 
         <dd>
@@ -20,24 +27,43 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.LastName):
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.LastName)
         </dd>
 
+        <dt>
+            Hire Date:
+        </dt>
+        <dd>
+            @Model.HireDate.ToString("d")
+        </dd>
+        <dt>
+            Birth Date:
+        </dt>
+        <dd>
+            @Model.DateOfBirth.ToString("d")
+        </dd>
+        <dt>
+            Salary
+        </dt>
+        <dd>
+            $@Model.Salary
+        </dd>
+
         @if (Model.Project == null)
         {
             <dt>
-                @Html.DisplayNameFor(model => model.Project.ProjectName)
+                @Html.DisplayNameFor(model => model.Project.ProjectName):
             </dt>
             <dd>No Project</dd>
         }
         else
         {
             <dt>
-                @Html.DisplayNameFor(model => model.Project.ProjectName)
+                @Html.DisplayNameFor(model => model.Project.ProjectName):
             </dt>
             <dd>
                 @Html.DisplayFor(model => model.Project.ProjectName)

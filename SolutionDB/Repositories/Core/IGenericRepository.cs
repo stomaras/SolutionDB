@@ -15,6 +15,8 @@ namespace Repositories.Core
 
         void Insert(T obj);
 
+        void Add(T obj);
+
         void Update(T obj);
 
         void Delete(object id);

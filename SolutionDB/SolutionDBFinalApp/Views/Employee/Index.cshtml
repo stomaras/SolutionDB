@@ -13,6 +13,9 @@
 <table class="table">
     <tr>
         <th>
+            Photo
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Project.ProjectName)
         </th>
         <th>
@@ -20,6 +23,19 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        
+        <th>
+            Hire Date
+        </th>
+        <th>
+            Date Of Birth
+        </th>
+        <th>
+            Country
+        </th>
+        <th>
+            Salary
         </th>
         <th>
             Managers
@@ -29,6 +45,9 @@
 
 @foreach (var employee in Model) {
 <tr>
+    <td>
+        <img width="90" src="@employee.PhotoUrl" />
+    </td>
     @if (employee.Project == null)
     {
         <td>No Project</td>
@@ -44,6 +63,18 @@
     </td>
     <td>
         @Html.DisplayFor(modelItem => employee.LastName)
+    </td>
+    <td>
+        @employee.HireDate.ToString("d")
+    </td>
+    <td>
+        @employee.DateOfBirth.ToString("d")
+    </td>
+    <td>
+        @employee.Country
+    </td>
+    <td>
+        $ @employee.Salary
     </td>
     <td>
         <ul>

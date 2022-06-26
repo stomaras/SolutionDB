@@ -21,6 +21,11 @@ namespace Repositories.Persistance
             table = db.Set<T>();    
         }
 
+        public void Add(T obj)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(object id)
         {
             throw new NotImplementedException();
@@ -39,12 +44,12 @@ namespace Repositories.Persistance
 
         public void Insert(T obj)
         {
-            throw new NotImplementedException();
+            table.Add(obj);
         }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            db.SaveChanges();
         }
 
         public void Update(T obj)

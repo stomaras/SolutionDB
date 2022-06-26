@@ -12,6 +12,8 @@ namespace Entities
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Subject { get; set; }
+        public double Salary { get; set; }
         public string PhotoUrl { get; set; }
 
         public Manager()

@@ -20,7 +20,7 @@ namespace ConsoleApp1.View.EmployeeView
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Employee Details : \n");
-            Console.WriteLine($"\t\tPersonal Infos:  First Name {employee.FirstName} , Last Name {employee.LastName}\n");
+            Console.WriteLine($"\t\tPersonal Infos:  First Name {employee.FirstName} , Last Name {employee.LastName}, with Age {employee.Age}, with hire date {employee.HireDate}, with Country {employee.Country}, with salary {employee.Salary}\n");
             if (employee.Project is null)
             {
                 Console.WriteLine("\t\tProject :  No Project");
@@ -50,7 +50,7 @@ namespace ConsoleApp1.View.EmployeeView
             Console.WriteLine("Employees:\n");
             foreach (var employee in employees)
             {
-                Console.WriteLine($"\t\tEmployee {{ with First Name {employee.FirstName}, with Last Name {employee.LastName} }}");
+                Console.WriteLine($"\t\tEmployee {{ First Name {employee.FirstName} , Last Name {employee.LastName}, with Age {employee.Age}, with hire date {employee.HireDate}, with Country {employee.Country}, with salary {employee.Salary}\n }}  ");
             }
             Console.ResetColor();
 
@@ -65,11 +65,11 @@ namespace ConsoleApp1.View.EmployeeView
                 if (employee.Project == null)
                 {
                     string Noproject = "No Project";
-                    Console.WriteLine($"\t\tEmployee {{ with First Name {employee.FirstName}, with Last Name {employee.LastName}, with project {Noproject}}}");
+                    Console.WriteLine($"\t\tFirst Name {employee.FirstName} , Last Name {employee.LastName}, with Age {employee.Age}, with hire date {employee.HireDate}, with Country {employee.Country}, with salary {employee.Salary}, with project {Noproject}}}");
                 }
                 else
                 {
-                    Console.WriteLine($"\t\tEmployee {{ with First Name {employee.FirstName}, with Last Name {employee.LastName}, with project {employee.Project.ProjectName}}}");
+                    Console.WriteLine($"\t\tEmployee {{ First Name {employee.FirstName} , Last Name {employee.LastName}, with Age {employee.Age}, with hire date {employee.HireDate}, with Country {employee.Country}, with salary {employee.Salary}, with project {employee.Project.ProjectName}}}");
 
                 }
             }
@@ -86,11 +86,11 @@ namespace ConsoleApp1.View.EmployeeView
                 if (employee.Project == null)
                 {
                     string Noproject = "No Project";
-                    Console.WriteLine($"\t\tEmployee {{ with First Name {employee.FirstName}, with Last Name {employee.LastName}, with project {Noproject}}}");
+                    Console.WriteLine($"\t\tEmployee {{ First Name {employee.FirstName} , Last Name {employee.LastName}, with Age {employee.Age}, with hire date {employee.HireDate}, with Country {employee.Country}, with salary {employee.Salary}, with project {Noproject}}}");
                 }
                 else
                 {
-                    Console.WriteLine($"\t\tEmployee {{ with First Name {employee.FirstName}, with Last Name {employee.LastName}, with project {employee.Project.ProjectName}}}");
+                    Console.WriteLine($"\t\tEmployee {{ First Name {employee.FirstName} , Last Name {employee.LastName}, with Age {employee.Age}, with hire date {employee.HireDate}, with Country {employee.Country}, with salary {employee.Salary} with project {employee.Project.ProjectName}}}");
 
                 }
                 Console.ResetColor();
@@ -106,7 +106,7 @@ namespace ConsoleApp1.View.EmployeeView
                 {
                     foreach (var manager in employee.Managers)
                     {
-                        Console.WriteLine($"\t\t\t\t\tManager {{ First Name : {manager.FirstName}, Last Name : {manager.LastName} }}");
+                        Console.WriteLine($"\t\t\t\t\tManager {{ First Name {manager.FirstName} , Last Name {manager.LastName}, with salary {manager.Salary}\n }}");
                     }
                 }
                 Console.ResetColor();
