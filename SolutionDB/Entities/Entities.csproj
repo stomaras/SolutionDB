@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="CompanyEntity.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="Enums\Country.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="ProjectUser.cs" />

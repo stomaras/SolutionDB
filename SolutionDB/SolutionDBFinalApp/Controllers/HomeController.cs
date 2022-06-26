@@ -14,7 +14,19 @@ namespace SolutionDBFinalApp.Controllers
         public ActionResult Index()
         {
             var assigmentsPerUser = myDBContext.ProjectUser.ToList();
-            return View();
+
+            var employeeNamesWithProjects = from assPerUser in assigmentsPerUser
+                       join employee in myDBContext.Employees
+                       on assPerUser.ProjectId equals employee.ProjectId
+                       select new
+                       {
+                           EmployeeNames = employee.LastName
+                           
+                       };
+
+
+
+            return Json(employeeNamesWithProjects, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult About()
