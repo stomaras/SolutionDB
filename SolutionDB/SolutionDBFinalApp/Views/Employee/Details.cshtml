@@ -1,0 +1,65 @@
+﻿@model Entities.Employee
+@using Entities
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        @if (Model.Project == null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Project.ProjectName)
+            </dt>
+            <dd>No Project</dd>
+        }
+        else
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Project.ProjectName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Project.ProjectName)
+            </dd>
+        }
+
+        @if (Model.Managers.Count == 0)
+        {
+            <dt>Managers:</dt>
+            <dd>No Managers Yet</dd>
+        }
+        else
+        {
+            <dt>Managers:</dt>
+            foreach (var manager in Model.Managers)
+            {
+               <dd>@manager.FirstName @manager.LastName</dd>
+            }
+        }
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
