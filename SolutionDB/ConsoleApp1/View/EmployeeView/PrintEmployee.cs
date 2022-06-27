@@ -1,4 +1,6 @@
-﻿using Entities;
+﻿
+using ConsoleApp1.CustomValidations;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,29 @@ namespace ConsoleApp1.View.EmployeeView
 {
     public class PrintEmployee : IPrintEmployee
     {
-        
+        public void EnterEmployeeDetails()
+        {
+            EmployeeHelper employeeHelper = new EmployeeHelper();
+            Console.WriteLine("Create Employee:\n");
+
+            Console.WriteLine("Enter Employee First Name:\n");
+            string firstName = employeeHelper.CheckName(Console.ReadLine());
+
+            Console.WriteLine("Enter Employee Last Name:\n");
+            string lastName = employeeHelper.CheckName(Console.ReadLine());
+
+            Console.WriteLine("Enter Employee Day Of Birth:\n");
+            int dayOfBirth = employeeHelper.CheckDay(Console.ReadLine());
+
+            Console.WriteLine("Enter Employee Month Of Birth:\n");
+            int monthOfBirth = employeeHelper.CheckMonth(Console.ReadLine());
+
+            Console.WriteLine("Enter Employee Year Of Birth:\n");
+            int yearOfBirth = employeeHelper.CheckYear(Console.ReadLine());
+
+            DateTime dateOfBirth = new DateTime(yearOfBirth, monthOfBirth, dayOfBirth);
+            
+        }
 
         public void EnterIdToSeeDetails()
         {

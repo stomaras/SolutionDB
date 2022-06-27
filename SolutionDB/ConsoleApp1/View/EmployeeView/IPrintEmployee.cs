@@ -17,5 +17,6 @@ namespace ConsoleApp1.View.EmployeeView
 
         void ShowEmployeeDetails(Employee employee);
         void EnterIdToSeeDetails();
+        void EnterEmployeeDetails();
     }
 }

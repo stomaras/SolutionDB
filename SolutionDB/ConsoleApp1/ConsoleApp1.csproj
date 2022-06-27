@@ -56,6 +56,7 @@
     <Compile Include="Controller\EmployeeController.cs" />
     <Compile Include="Controller\ManagerController.cs" />
     <Compile Include="Controller\ProjectController.cs" />
+    <Compile Include="CustomValidations\EmployeeHelper.cs" />
     <Compile Include="Enums\Choice.cs" />
     <Compile Include="ErrorMessages\ErrorMessage.cs" />
     <Compile Include="Factory\Factory.cs" />

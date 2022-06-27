@@ -12,6 +12,7 @@ namespace ConsoleApp1.Enums
         ReadEmployeesPerProject,
         ReadingEmployeesPerProjectPerManager,
         EmployeeDetails,
+        CreateEmployee,
         CreateProjects,
         CreateManagers,
         DeleteEmployees,

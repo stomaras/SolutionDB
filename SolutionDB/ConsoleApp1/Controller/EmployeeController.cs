@@ -22,6 +22,18 @@ namespace ConsoleApp1.Controller
             companyUnit = new UnitOfWork(catalogos);
         }
 
+        public void CreateEmployees()
+        {
+            try
+            {
+                PrintEmployee pr = new PrintEmployee();
+                pr.EnterEmployeeDetails();
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
         public void ReadEmployees()
         {
             try
