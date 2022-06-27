@@ -1,0 +1,46 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "1cb8b26b-69fb-45d8-9ea1-5a5f307f69c3": {
+      "ProjectGuid": "1cb8b26b-69fb-45d8-9ea1-5a5f307f69c3",
+      "DisplayName": "Entities",
+      "ColorIndex": 0
+    },
+    "6ae2324f-2ab8-4035-aae5-11ab634de250": {
+      "ProjectGuid": "6ae2324f-2ab8-4035-aae5-11ab634de250",
+      "DisplayName": "MyDatabase",
+      "ColorIndex": 1
+    },
+    "8f40e401-56e1-4ffa-b317-5a6d8ad79ab1": {
+      "ProjectGuid": "8f40e401-56e1-4ffa-b317-5a6d8ad79ab1",
+      "DisplayName": "RepositoryServices",
+      "ColorIndex": 2
+    },
+    "31ca8b0a-b183-4847-a2f3-4eed90836e86": {
+      "ProjectGuid": "31ca8b0a-b183-4847-a2f3-4eed90836e86",
+      "DisplayName": "Experiments",
+      "ColorIndex": 3
+    },
+    "3544c20f-22ce-4294-85d6-3b07a7aab861": {
+      "ProjectGuid": "3544c20f-22ce-4294-85d6-3b07a7aab861",
+      "DisplayName": "WebAppHollywood",
+      "ColorIndex": 4
+    },
+    "90134994-b2f6-4133-9397-9afca129dd30": {
+      "ProjectGuid": "90134994-b2f6-4133-9397-9afca129dd30",
+      "DisplayName": "DesktopApp",
+      "ColorIndex": 5
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "c248855c-37af-4230-8960-97cec3d9bdd3": {
+      "ProjectGuid": "c248855c-37af-4230-8960-97cec3d9bdd3",
+      "DisplayName": "FinalApp",
+      "ColorIndex": 6
+    }
+  },
+  "NextColorIndex": 7
+}

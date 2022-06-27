@@ -1,0 +1,15 @@
+C:\Users\hecto\source\repos\Hollywood\MyDatabase\bin\Debug\MyDatabase.dll.config
+C:\Users\hecto\source\repos\Hollywood\MyDatabase\bin\Debug\MyDatabase.dll
+C:\Users\hecto\source\repos\Hollywood\MyDatabase\bin\Debug\MyDatabase.pdb
+C:\Users\hecto\source\repos\Hollywood\MyDatabase\bin\Debug\EntityFramework.dll
+C:\Users\hecto\source\repos\Hollywood\MyDatabase\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\hecto\source\repos\Hollywood\MyDatabase\bin\Debug\EntityFramework.xml
+C:\Users\hecto\source\repos\Hollywood\MyDatabase\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\hecto\source\repos\Hollywood\MyDatabase\obj\Debug\MyDatabase.csproj.AssemblyReference.cache
+C:\Users\hecto\source\repos\Hollywood\MyDatabase\obj\Debug\MyDatabase.csproj.CoreCompileInputs.cache
+C:\Users\hecto\source\repos\Hollywood\MyDatabase\obj\Debug\MyDatabase.csproj.CopyComplete
+C:\Users\hecto\source\repos\Hollywood\MyDatabase\obj\Debug\MyDatabase.dll
+C:\Users\hecto\source\repos\Hollywood\MyDatabase\obj\Debug\MyDatabase.pdb
+C:\Users\hecto\source\repos\Hollywood\MyDatabase\bin\Debug\Entities.dll
+C:\Users\hecto\source\repos\Hollywood\MyDatabase\bin\Debug\Entities.pdb
+C:\Users\hecto\source\repos\Hollywood\MyDatabase\bin\Debug\Entities.dll.config
