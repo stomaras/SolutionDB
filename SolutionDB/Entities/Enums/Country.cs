@@ -8,12 +8,12 @@ namespace Entities.Enums
 {
     public enum Country
     {
-        Greece = 1,
-        France,
-        Spain,
-        Italy,
-        Malta,
-        Portugal,
-        Germany
+        greece = 1,
+        france,
+        spain,
+        italy,
+        malta,
+        portugal,
+        germany
     }
 }

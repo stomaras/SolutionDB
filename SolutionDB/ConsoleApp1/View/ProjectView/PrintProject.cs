@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1.View.Project
+namespace ConsoleApp1.View.ProjectView
 {
-    interface IPrintProject
+    public class PrintProject
     {
     }
 }

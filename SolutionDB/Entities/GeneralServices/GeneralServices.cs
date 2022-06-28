@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1.View.Project
+namespace Entities.GeneralServices
 {
-    public class PrintProject
+    public static class GeneralServices
     {
+
+        
     }
 }

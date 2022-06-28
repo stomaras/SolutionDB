@@ -1,6 +1,7 @@
 ﻿
 using ConsoleApp1.CustomValidations;
 using Entities;
+using Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,10 @@ namespace ConsoleApp1.View.EmployeeView
 {
     public class PrintEmployee : IPrintEmployee
     {
-        public void EnterEmployeeDetails()
+        public void EnterEmployeeDetails(List<string> ProjectTitles, List<int> ProjectIds, out (string, string, DateTime, DateTime, Enum, double, string) employee)
         {
             EmployeeHelper employeeHelper = new EmployeeHelper();
+           
             Console.WriteLine("Create Employee:\n");
 
             Console.WriteLine("Enter Employee First Name:\n");
@@ -32,7 +34,33 @@ namespace ConsoleApp1.View.EmployeeView
             int yearOfBirth = employeeHelper.CheckYear(Console.ReadLine());
 
             DateTime dateOfBirth = new DateTime(yearOfBirth, monthOfBirth, dayOfBirth);
-            
+
+            Console.WriteLine("Enter Employee Hire Day:\n");
+            int hireDay = employeeHelper.CheckHireDay(Console.ReadLine());
+
+            Console.WriteLine("Enter Employee Hire Month:\n");
+            int hireMonth = employeeHelper.CheckHireMonth(Console.ReadLine());
+
+            Console.WriteLine("Enter Employee Hire Year:\n");
+            int hireYear = employeeHelper.CheckHireYear(Console.ReadLine());
+
+            DateTime hireDate = new DateTime(hireYear, hireMonth, hireDay);
+
+            Console.WriteLine("Enter Country of Employee:\n");
+            string country = Console.ReadLine();
+            string countryin = employeeHelper.CheckCountry(country).ToLower();
+            Country inputCountry = (Country)Enum.Parse(typeof(Country), countryin);
+
+            Console.WriteLine("Enter Salary of Employee: \n");
+            string salary = Console.ReadLine();
+            double salaryValid = employeeHelper.CheckValidSalary(salary);
+
+            Console.WriteLine("Enter Available Project to register:\n");
+            Tuple<string> projectTitle = new Tuple<string>("");
+            string projectName = employeeHelper.CheckProject(Console.ReadLine(), ProjectTitles, ProjectIds, out projectTitle);
+
+            employee = (firstName, lastName, dateOfBirth, hireDate, inputCountry, salaryValid, projectName);
+
         }
 
         public void EnterIdToSeeDetails()
@@ -136,5 +164,7 @@ namespace ConsoleApp1.View.EmployeeView
                 Console.ResetColor();
             }
         }
+
+        
     }
 }

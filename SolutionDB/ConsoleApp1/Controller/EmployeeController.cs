@@ -1,11 +1,13 @@
 ﻿using ConsoleApp1.Validations.EmployeeValidations;
 using ConsoleApp1.View.EmployeeView;
 using Entities;
+using Entities.Enums;
 using MyDatabase;
 using Repositories.Persistance;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,7 +29,19 @@ namespace ConsoleApp1.Controller
             try
             {
                 PrintEmployee pr = new PrintEmployee();
-                pr.EnterEmployeeDetails();
+                List<Project> projects = (List<Project>) companyUnit.Projects.GetAll();
+                List<string> projectsTitles = companyUnit.Projects.GetProjectTitles(projects);
+                List<int> projectIds = companyUnit.Projects.GetProjectIds(projects);
+                (string, string, DateTime, DateTime, Enum, double, string) employee = 
+                   ("","",DateTime.Now,DateTime.Now,Country.greece, 0.00 ,"");
+                pr.EnterEmployeeDetails(projectsTitles,projectIds, out employee);
+
+                Employee employee1 = new Employee()
+                {
+                   
+                    
+
+                };
             }catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
@@ -103,5 +117,7 @@ namespace ConsoleApp1.Controller
         {
             Console.WriteLine("Error service");
         }
+
+        
     }
 }

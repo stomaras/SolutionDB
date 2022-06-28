@@ -105,5 +105,88 @@ namespace ConsoleApp1.ErrorMessages
             Console.ResetColor();
         }
 
+        public static void HireDayMustBeInValidRange(int minDayRange, int maxDayRange)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Min Day you can hire an employee must be at least {minDayRange} and max day to hire employee must be {maxDayRange}");
+            Console.ResetColor();
+        }
+
+        public static void HireDayMustBeInteger()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Hire Day Must be a Number:\n");
+            Console.ResetColor();
+        }
+
+        public static void HireMonthMustBeInValidRange(int minHireMonth, int maxHireMonth)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Hire Month of an employee must be between {minHireMonth} and {maxHireMonth}");
+            Console.ResetColor();
+        }
+
+        public static void HireMonthMustBeInteger()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Hire Month must be a numeric value :\n");
+            Console.ResetColor();
+        }
+
+        public static void YearUpperBoundRange(int upperBound)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Hire Year must be less than {upperBound}");
+            Console.ResetColor();
+        }
+
+        public static void YearMustBeNumericValue()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Hire Year Must be a number!");
+            Console.ResetColor();
+        }
+
+        public static void CountriesMustBeAmong(List<string> countries)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            const int first = -2;
+            const int second = -3;
+            Console.WriteLine($"Country must be something among:\n");
+            for (int i = 0; i < countries.Count; i++)
+            {
+                Console.WriteLine($"{i, first} -> {countries[i],second}\n");
+            }
+            Console.ResetColor();
+        }
+
+        public static void SalaryBoundRange(double lowerBound, double higherBound)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Salary must be between ${lowerBound} and ${higherBound} ");
+            Console.ResetColor();
+        }
+
+        public static void SalaryCannotBeNull()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Salary cannot be null");
+            Console.ResetColor();
+        }
+
+        public static void SalaryMustBeDoubleValue()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Salary must be double value");
+            Console.ResetColor();
+        }
+
+        public static void WrongProjectTitle(List<string> projectTitles)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+        }
+
+
+
     }
 }

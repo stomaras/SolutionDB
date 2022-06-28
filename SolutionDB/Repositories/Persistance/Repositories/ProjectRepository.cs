@@ -15,5 +15,33 @@ namespace Repositories.Persistance.Repositories
         {
 
         }
+
+        public Project GetProjectByTitle(string projectName)
+        {
+            var projects = GetAll();
+            foreach (var pro in projects)
+            {
+                if(pro.ProjectName == projectName)
+                {
+                    return pro;
+                }
+            }
+            return null;
+        }
+
+        public List<int> GetProjectIds(IEnumerable<Project> projects)
+        {
+            List<int> projectIds = (from pro in projects
+                                    select pro.ProjectId).ToList();
+
+            return projectIds;
+        }
+
+        public List<string> GetProjectTitles(IEnumerable<Project> projects)
+        {
+            List<string> projectTitles = (from pro in projects
+                                          select pro.ProjectName).ToList();
+            return projectTitles;
+        }
     }
 }
