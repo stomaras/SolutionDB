@@ -2,6 +2,7 @@
 using ConsoleApp1.CustomValidations;
 using Entities;
 using Entities.Enums;
+using Entities.GeneralServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace ConsoleApp1.View.EmployeeView
 {
     public class PrintEmployee : IPrintEmployee
     {
-        public void EnterEmployeeDetails(List<string> ProjectTitles, List<int> ProjectIds, out (string, string, DateTime, DateTime, Enum, double, string) employee)
+        public void EnterEmployeeDetails(out (string, string, DateTime, DateTime, Enum, double) employee)
         {
             EmployeeHelper employeeHelper = new EmployeeHelper();
            
@@ -55,17 +56,28 @@ namespace ConsoleApp1.View.EmployeeView
             string salary = Console.ReadLine();
             double salaryValid = employeeHelper.CheckValidSalary(salary);
 
-            Console.WriteLine("Enter Available Project to register:\n");
-            Tuple<string> projectTitle = new Tuple<string>("");
-            string projectName = employeeHelper.CheckProject(Console.ReadLine(), ProjectTitles, ProjectIds, out projectTitle);
 
-            employee = (firstName, lastName, dateOfBirth, hireDate, inputCountry, salaryValid, projectName);
+            employee = (firstName, lastName, dateOfBirth, hireDate, inputCountry, salaryValid);
 
         }
 
         public void EnterIdToSeeDetails()
         {
             Console.WriteLine($"Enter Employee ID to see details:\n");
+        }
+
+        public void EnterProjectEmployee(List<Project> projects)
+        {
+            
+            List<string> projectTitles = new List<string>();
+            foreach (var pro in projects)
+            {
+                projectTitles.Add(pro.ProjectName);
+            }
+            PrintService.ShowProjectTitles(projectTitles);
+            Console.WriteLine("Enter Employee Project Name If You Want:\n");
+            string projectName = Console.ReadLine();
+
         }
 
         public void ShowEmployeeDetails(Employee employee)

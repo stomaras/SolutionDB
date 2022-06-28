@@ -17,6 +17,8 @@ namespace ConsoleApp1.View.EmployeeView
 
         void ShowEmployeeDetails(Employee employee);
         void EnterIdToSeeDetails();
-        void EnterEmployeeDetails(List<string> projectTitles, List<int> projectIds, out (string, string, DateTime, DateTime, Enum, double, string) employee);
+        void EnterEmployeeDetails(out (string, string, DateTime, DateTime, Enum, double) employee);
+
+        void EnterProjectEmployee(List<Project> projects);
     }
 }

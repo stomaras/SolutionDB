@@ -184,6 +184,13 @@ namespace ConsoleApp1.ErrorMessages
         public static void WrongProjectTitle(List<string> projectTitles)
         {
             Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Try again:\n");
+            Console.WriteLine("Available Options of titles:\n");
+            for (int i = 0; i < projectTitles.Count; i++)
+            {
+                Console.WriteLine($"{i} -> {projectTitles[i]}");
+            }
+            Console.ResetColor();
         }
 
 

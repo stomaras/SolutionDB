@@ -32,16 +32,20 @@ namespace ConsoleApp1.Controller
                 List<Project> projects = (List<Project>) companyUnit.Projects.GetAll();
                 List<string> projectsTitles = companyUnit.Projects.GetProjectTitles(projects);
                 List<int> projectIds = companyUnit.Projects.GetProjectIds(projects);
-                (string, string, DateTime, DateTime, Enum, double, string) employee = 
-                   ("","",DateTime.Now,DateTime.Now,Country.greece, 0.00 ,"");
-                pr.EnterEmployeeDetails(projectsTitles,projectIds, out employee);
-
+                (string, string, DateTime, DateTime, Enum, double) employee = ("","",DateTime.Now,DateTime.Now,Country.greece, 0.00);
+                pr.EnterEmployeeDetails(out employee);
                 Employee employee1 = new Employee()
                 {
-                   
-                    
-
+                   FirstName = employee.Item1,
+                   LastName = employee.Item2,
+                   DateOfBirth = employee.Item3,
+                   HireDate = employee.Item4,
+                   Country = (Country)employee.Item5,
+                   Salary = employee.Item6,
                 };
+
+                Console.WriteLine($"{employee1.FirstName}{employee1.LastName}{employee1.DateOfBirth}{employee1.HireDate}{employee1.Country}{employee1.Salary}{employee1.Project}");
+
             }catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
@@ -111,7 +115,20 @@ namespace ConsoleApp1.Controller
             }
         }
 
-        
+        public static Project CheckProject(List<Project> projects, string projectName)
+        {
+            foreach (var pro in projects)
+            {
+                if (pro.ProjectName == projectName)
+                {
+                    return pro;
+                    
+                }
+            }
+            return null;
+        }
+
+
 
         public void ErrorService()
         {

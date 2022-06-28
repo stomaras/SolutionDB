@@ -61,3 +61,5 @@ C:\Users\user\SolutionDB\SolutionDB\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.Cor
 C:\Users\user\SolutionDB\SolutionDB\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CopyComplete
 C:\Users\user\SolutionDB\SolutionDB\ConsoleApp1\obj\Debug\ConsoleApp1.exe
 C:\Users\user\SolutionDB\SolutionDB\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+C:\Users\user\SolutionDB\SolutionDB\ConsoleApp1\bin\Debug\System.ValueTuple.dll
+C:\Users\user\SolutionDB\SolutionDB\ConsoleApp1\bin\Debug\System.ValueTuple.xml
