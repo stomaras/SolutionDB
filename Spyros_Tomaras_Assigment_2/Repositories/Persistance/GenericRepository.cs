@@ -33,7 +33,8 @@ namespace Repositories.Persistance
 
         public T GetById(object id)
         {
-            throw new NotImplementedException();
+            var trainer = table.Find(id);
+            return trainer;
         }
 
         public void Insert(T obj)
