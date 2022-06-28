@@ -16,5 +16,35 @@ namespace Repositories.Persistance.Repositories
         {
 
         }
+
+        public List<string> GetManagersByFirstName(List<Manager> managers)
+        {
+            List<string> managersFirstName = new List<string>();
+            foreach (var manager in managers)
+            {
+                managersFirstName.Add(manager.FirstName);
+            }
+            return managersFirstName;
+        }
+
+        public List<int> GetManagersById(List<Manager> managers)
+        {
+            List<int> managerIds = new List<int>();
+            foreach (var manager in managers)
+            {
+                managerIds.Add(manager.ManagerId);
+            }
+            return managerIds;
+        }
+
+        public List<string> GetManagersByLastName(List<Manager> managers)
+        {
+            List<string> managersLastName = new List<string>();
+            foreach (var manager in managers)
+            {
+                managersLastName.Add(manager.FirstName);
+            }
+            return managersLastName;
+        }
     }
 }

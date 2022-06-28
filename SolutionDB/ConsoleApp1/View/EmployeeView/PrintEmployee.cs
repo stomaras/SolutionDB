@@ -13,6 +13,25 @@ namespace ConsoleApp1.View.EmployeeView
 {
     public class PrintEmployee : IPrintEmployee
     {
+        public void EmployeeCreatedSuccessfully(Employee employee)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("New Employee Created Successfully:\n");
+            Console.WriteLine($"\t\t Employee {{ with First Name {employee.FirstName}, Last Name {employee.LastName}, with Date Of Birth {employee.DateOfBirth.ToString("d")}, with Hire Date {employee.HireDate.ToString("d")}, from Country {employee.Country}, with Salary {employee.Salary} }}\n");
+            Console.WriteLine("\t\tProject:\n");
+            if (employee.Project is null)
+            {
+                Console.WriteLine($"\t\t\t No Project Preferable");
+            }
+            else
+            {
+                Console.WriteLine($"\t\t\t{employee.Project.ProjectName}");
+            }
+            Console.ResetColor();
+        }
+
+
+
         public void EnterEmployeeDetails(out (string, string, DateTime, DateTime, Enum, double) employee)
         {
             EmployeeHelper employeeHelper = new EmployeeHelper();
@@ -66,7 +85,7 @@ namespace ConsoleApp1.View.EmployeeView
             Console.WriteLine($"Enter Employee ID to see details:\n");
         }
 
-        public void EnterProjectEmployee(List<Project> projects)
+        public string EnterProjectEmployee(List<Project> projects)
         {
             
             List<string> projectTitles = new List<string>();
@@ -77,6 +96,7 @@ namespace ConsoleApp1.View.EmployeeView
             PrintService.ShowProjectTitles(projectTitles);
             Console.WriteLine("Enter Employee Project Name If You Want:\n");
             string projectName = Console.ReadLine();
+            return projectName;
 
         }
 

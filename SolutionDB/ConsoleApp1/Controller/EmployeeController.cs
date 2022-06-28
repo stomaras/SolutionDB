@@ -29,11 +29,19 @@ namespace ConsoleApp1.Controller
             try
             {
                 PrintEmployee pr = new PrintEmployee();
-                List<Project> projects = (List<Project>) companyUnit.Projects.GetAll();
-                List<string> projectsTitles = companyUnit.Projects.GetProjectTitles(projects);
-                List<int> projectIds = companyUnit.Projects.GetProjectIds(projects);
+                List<Project> projects = GetProjects();
+                List<Manager> managers = GetManagers();
+                List<string> projectsTitles = GetAllProjectTitles(projects);
+                List<int> projectIds = GetAllProjectIds(projects);
+                List<string> managerFirstNames = GetManagerFirstNames(managers);
+                List<string> managersLastNames = GetManagerLastNames(managers);
+                    
+               
                 (string, string, DateTime, DateTime, Enum, double) employee = ("","",DateTime.Now,DateTime.Now,Country.greece, 0.00);
                 pr.EnterEmployeeDetails(out employee);
+                string ProjectName = pr.EnterProjectEmployee(projects);
+                Console.WriteLine(ProjectName);
+                Project project = companyUnit.Projects.GetProjectByTitle(ProjectName);
                 Employee employee1 = new Employee()
                 {
                    FirstName = employee.Item1,
@@ -42,9 +50,13 @@ namespace ConsoleApp1.Controller
                    HireDate = employee.Item4,
                    Country = (Country)employee.Item5,
                    Salary = employee.Item6,
+                   Project = project
                 };
 
-                Console.WriteLine($"{employee1.FirstName}{employee1.LastName}{employee1.DateOfBirth}{employee1.HireDate}{employee1.Country}{employee1.Salary}{employee1.Project}");
+                pr.EmployeeCreatedSuccessfully(employee1);
+
+                
+                
 
             }catch(Exception ex)
             {
@@ -135,6 +147,43 @@ namespace ConsoleApp1.Controller
             Console.WriteLine("Error service");
         }
 
-        
+
+        /*
+         * Non - Action Methods
+         * 
+         */
+
+        private List<string> GetManagerFirstNames(List<Manager> managers)
+        {
+            return companyUnit.Managers.GetManagersByFirstName(managers);
+        }
+
+        public List<string> GetManagerLastNames(List<Manager> managers)
+        {
+            return companyUnit.Managers.GetManagersByLastName(managers);
+        }
+
+        public List<Project> GetProjects()
+        {
+            return (List<Project>) companyUnit.Projects.GetAll();
+        }
+
+        public List<Manager> GetManagers()
+        {
+            return (List<Manager>)companyUnit.Managers.GetAll();
+        }
+
+        public List<string> GetAllProjectTitles(List<Project> projects)
+        {
+            return (List<string>)companyUnit.Projects.GetProjectTitles(projects);
+        }
+
+        public List<int> GetAllProjectIds(List<Project> projects)
+        {
+            return (List<int>)companyUnit.Projects.GetProjectIds(projects);
+        }
+
+
+
     }
 }

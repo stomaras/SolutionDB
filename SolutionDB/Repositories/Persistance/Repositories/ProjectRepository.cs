@@ -21,7 +21,7 @@ namespace Repositories.Persistance.Repositories
             var projects = GetAll();
             foreach (var pro in projects)
             {
-                if(pro.ProjectName == projectName)
+                if(pro.ProjectName.ToLower() == projectName.ToLower())
                 {
                     return pro;
                 }

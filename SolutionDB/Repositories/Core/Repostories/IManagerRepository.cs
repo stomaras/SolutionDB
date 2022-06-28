@@ -9,5 +9,8 @@ namespace Repositories.Core.Repostories
 {
     public interface IManagerRepository : IGenericRepository<Manager>
     {
+        List<string> GetManagersByFirstName(List<Manager> managers);
+        List<string> GetManagersByLastName(List<Manager> managers);
+        List<int> GetManagersById(List<Manager> managers);
     }
 }

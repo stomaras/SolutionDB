@@ -19,7 +19,6 @@ namespace Repositories.Core.Repostories
 
         Employee GetAllEmployeesPerProjectPerManagerById(int? id);
 
-        
 
 
     }
