@@ -1,7 +1,42 @@
-﻿
+﻿@model Entities.Trainer
 @{
     ViewBag.Title = "Create";
 }
 
 <h2>Create Employee</h2>
+
+<form method="post">
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName)
+        @Html.EditorFor(m=> m.FirstName, new {htmlAttributes = new {@class = "form-control", placeholder = "Give Your First Name"}})
+    </div>
+    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName)
+        @Html.EditorFor(m=>m.LastName, new {htmlAttributes = new {@class = "form-control", placeholder = "Give your Last Name"}})
+    </div>
+    @Html.ValidationMessageFor(m=>m.LastName, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m=>m.Subject)
+        @Html.EditorFor(m=>m.Subject, new {htmlAttributes = new {@class = "form-control", placeholder = "Give Your Subject"}})
+    </div>
+    @Html.ValidationMessageFor(m=>m.Subject, "", new { @class = "text-danger"})
+
+
+    <br/>
+    <input class="btn btn-primary" type="submit" value="Create" />
+
+
+</form>
+<br/>
+
+<a class="btn btn-success" href="/Trainer/Index">Go Back</a>
+
+
+
 

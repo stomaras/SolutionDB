@@ -3,6 +3,17 @@
     ViewBag.Title = "Index";
 }
 
+
+<br/>
+<br/>
+@if (@TempData["message"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        <strong>@TempData["message"]</strong>    
+    </div>
+    
+}
+
 <h2>Index of Trainers</h2>
 
 <table class="table">
@@ -24,9 +35,9 @@
                 <td>@trainer.LastName</td>
                 <td>@trainer.Subject</td>
                 <td>
-                    <a href="/Trainer/Details?Id=@trainer.TrainerId" class="btn btn-info">Details</a> 
-                    <a href="#" class="btn btn-danger">Delete</a> 
-                    <a href="#" class="btn btn-primary">Edit</a> 
+                    <a href="/Trainer/Details?Id=@trainer.TrainerId" class="btn btn-info">Details</a>
+                    <a href="#" class="btn btn-danger">Delete</a>
+                    <a href="#" class="btn btn-primary">Edit</a>
                 </td>
             </tr>
         }

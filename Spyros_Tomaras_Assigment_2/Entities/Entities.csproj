@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomValidations\Helper.cs" />
+    <Compile Include="Factory\Factory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchoolEntity.cs" />
     <Compile Include="Trainer.cs" />

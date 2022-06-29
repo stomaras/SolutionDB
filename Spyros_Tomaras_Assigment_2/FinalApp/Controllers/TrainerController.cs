@@ -1,4 +1,7 @@
-﻿using MyDatabase;
+﻿using Entities;
+using Entities.CustomValidations;
+using Entities.Factory;
+using MyDatabase;
 using Repositories.Persistance;
 using System;
 using System.Collections.Generic;
@@ -47,6 +50,30 @@ namespace FinalApp.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+
+        // POST : Trainer Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Trainer trainer)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                schoolUnitOfWork.Trainers.Insert(trainer);
+                ShowAlert("You have successfully created employee with first name:" + trainer.FirstName + " with last name " + trainer.LastName);
+                return RedirectToAction("Index");
+            }
+            return View(trainer);
+        }
+
+
+
+
+        [NonAction]
+        public void ShowAlert(string message)
+        {
+            TempData["message"] = message;
         }
 
 

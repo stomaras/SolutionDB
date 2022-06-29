@@ -39,7 +39,8 @@ namespace Repositories.Persistance
 
         public void Insert(T obj)
         {
-            throw new NotImplementedException();
+            db.Entry(obj).State = EntityState.Added;
+            db.SaveChanges();
         }
 
         public void Save()
