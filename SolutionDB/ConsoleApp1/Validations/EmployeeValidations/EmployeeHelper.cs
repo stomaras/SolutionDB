@@ -10,6 +10,43 @@ namespace ConsoleApp1.Validations.EmployeeValidations
     public class EmployeeHelper
     {
 
+        public int CheckNumOfManagers(int realNumOfManagers, string numOfManagers)
+        {
+            int numericValue;
+            bool isNumber = false;
+            bool isValidRange = false;
+            int numOfManagersInput = -1;
+            isNumber = int.TryParse(numOfManagers, out numericValue);
+            if (isNumber)
+            {
+                Console.WriteLine("d");
+                numOfManagersInput = numericValue;
+                Func<int, int ,bool> isSmaller = IsSmallerFromNumOfManagers;
+                bool isValidManagerNumbers = isSmaller.Invoke(numOfManagersInput,realNumOfManagers);
+                if (isValidManagerNumbers)
+                {
+                    return numOfManagersInput;
+                }
+                else
+                {
+                    Func<int, string> inValidNumOfManagers = InvalidNumberOfManagersMessage;
+                    string message = inValidNumOfManagers.Invoke(realNumOfManagers);
+                    Console.WriteLine(message);
+                    Console.ResetColor();
+                    return -1;
+                }
+            }
+            else
+            {
+                Console.WriteLine("f");
+                Func<string> managerInput = managerInputMustBeANumber;
+                string message = managerInput.Invoke();
+                Console.WriteLine(message);
+                Console.ResetColor();
+                return -1;
+            }
+        }
+
         public static int CheckEmployeeId(List<int> employeeIds, string employeeId)
         {
 
@@ -65,5 +102,32 @@ namespace ConsoleApp1.Validations.EmployeeValidations
                 return true;
             }
         }
+
+        #region Delegates Helper Region
+        public bool IsSmallerFromNumOfManagers(int numOfManagersInput, int realNumOfManagers)
+        {
+            if (numOfManagersInput <= realNumOfManagers)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public string InvalidNumberOfManagersMessage(int RealNumOfManagers)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            string message = $"Invalid : number of managers must be among 0 - {RealNumOfManagers}";
+            return message;
+        }
+
+        public string managerInputMustBeANumber()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            return "Manager input must be a numeric value";
+        }
+        #endregion
     }
 }

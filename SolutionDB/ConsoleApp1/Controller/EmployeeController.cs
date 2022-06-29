@@ -29,18 +29,37 @@ namespace ConsoleApp1.Controller
             try
             {
                 PrintEmployee pr = new PrintEmployee();
+                EmployeeHelper empHelp = new EmployeeHelper();
                 List<Project> projects = GetProjects();
                 List<Manager> managers = GetManagers();
                 List<string> projectsTitles = GetAllProjectTitles(projects);
                 List<int> projectIds = GetAllProjectIds(projects);
                 List<string> managerFirstNames = GetManagerFirstNames(managers);
                 List<string> managersLastNames = GetManagerLastNames(managers);
+                List<int> managerIds = GetManagerIds(managers);
+
+                int numOfManagers = managers.Count;
+                Console.WriteLine("Enter number of Managers:\n");
+                string numOfManagerss = Console.ReadLine();
+
+                int managersCount = empHelp.CheckNumOfManagers(numOfManagers, numOfManagerss);
+                if (managersCount != -1)
+                {
                     
-               
+                    List<int> managersofEmployees = pr.EnterManagerIds(managerIds, managersCount);
+                }
+                else
+                {
+                    List<Manager> managersToEmployee = null;
+                }
+                
+                
+
                 (string, string, DateTime, DateTime, Enum, double) employee = ("","",DateTime.Now,DateTime.Now,Country.greece, 0.00);
                 pr.EnterEmployeeDetails(out employee);
                 string ProjectName = pr.EnterProjectEmployee(projects);
-                Console.WriteLine(ProjectName);
+                
+                
                 Project project = companyUnit.Projects.GetProjectByTitle(ProjectName);
                 Employee employee1 = new Employee()
                 {
@@ -182,6 +201,19 @@ namespace ConsoleApp1.Controller
         {
             return (List<int>)companyUnit.Projects.GetProjectIds(projects);
         }
+
+        public List<int> GetManagerIds(List<Manager> managers)
+        {
+            List<int> managerIds = new List<int>();
+            foreach (var manager in managers)
+            {
+                managerIds.Add(manager.ManagerId);
+            }
+            return managerIds;
+        }
+
+
+
 
 
 

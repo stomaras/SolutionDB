@@ -443,6 +443,40 @@ namespace ConsoleApp1.CustomValidations
             
         }
 
+        public int CheckNumOfManagers(int realNumOfManagers, string numOfManagers)
+        {
+            int numericValue;
+            bool isNumber = false;
+            bool isValidRange = false;
+            int numOfManagersInput = -1;
+            isNumber = int.TryParse(numOfManagers, out numericValue);
+            if (isNumber)
+            {
+                numOfManagersInput = numericValue;
+                Func<int, int, bool> isSmaller = IsSmallerFromNumOfManagers;
+                bool isValidManagerNumbers = isSmaller.Invoke(numOfManagersInput, realNumOfManagers);
+                if (isValidManagerNumbers)
+                {
+                    return numOfManagersInput;
+                }
+                else
+                {
+                    Func<int, string> inValidNumOfManagers = InvalidNumberOfManagersMessage;
+                    inValidNumOfManagers.Invoke(realNumOfManagers);
+                    Console.ResetColor();
+                    return -1;
+                }
+            }
+            else
+            {
+                Func<string> managerInput = managerInputMustBeANumber;
+                managerInput.Invoke();
+                Console.ResetColor();
+                return -1;
+            }
+        }
+
+
 
 
 
@@ -536,7 +570,31 @@ namespace ConsoleApp1.CustomValidations
             return countries;
         }
 
-        
+        public bool IsSmallerFromNumOfManagers(int numOfManagersInput, int realNumOfManagers)
+        {
+            if (numOfManagersInput <= realNumOfManagers)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public string InvalidNumberOfManagersMessage(int RealNumOfManagers)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            string message = $"Invalid number of managers range managers range must be among 0 - {RealNumOfManagers}";
+            return message;
+        }
+
+        public string managerInputMustBeANumber()
+        {
+            return "Manager input number must be a numeric value";
+        }
+
+
 
         #endregion
     }

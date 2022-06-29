@@ -85,6 +85,81 @@ namespace ConsoleApp1.View.EmployeeView
             Console.WriteLine($"Enter Employee ID to see details:\n");
         }
 
+        public List<int> EnterManagerIds(List<int> managerIds, int numOfManagers)
+        {
+            List<int> mngrIdsReturn = new List<int>();
+            for (int i = 0; i < numOfManagers; i++)
+            {
+                Console.WriteLine("Enter Manager id:\n");
+                string managerId = Console.ReadLine();
+                bool isValidRange = false;
+                bool added = false;
+                bool isNumeric = false;
+                int numOfManagersInput = -1;
+                int numericValue = -1;
+                int managerIdInt = -1;
+                
+                while (!isValidRange || !added || !isNumeric)
+                {
+                    isNumeric = int.TryParse(managerId, out numericValue);
+                    if (isNumeric)
+                    {
+                        managerIdInt = numericValue;
+                        Func<List<int>, int ,bool> isValidRangeIds = IsValidRangeIdsNums;
+                        isValidRange = isValidRangeIds.Invoke(managerIds,numericValue);
+                        if (isValidRange)
+                        {
+                            Func<List<int>, int, bool> isAdded = IsManagerIdExists;
+                            added = isAdded.Invoke(mngrIdsReturn,managerIdInt);
+                            if (added)
+                            {
+                                Console.WriteLine("Managers already selected select other one!");
+                            }
+                            else
+                            {
+                                mngrIdsReturn.Add(managerIdInt);   
+                            }
+                        }
+                        else
+                        {
+                            Action<List<int>> showAvailableIds = ShowAllAvailableIds;
+                            showAvailableIds.Invoke(managerIds);
+                            managerId = Console.ReadLine();
+                        }
+                    }
+                    else
+                    {
+                        string message = "";
+                        Action<string> idMustBeNumeric = ShowMngrIdsMustBeNumeric;
+                        idMustBeNumeric.Invoke(message);
+                        managerId = Console.ReadLine();
+                    }
+
+                }
+                
+            }
+            return mngrIdsReturn;
+        }
+
+        public int EnterManagersOfEmployees(int numOfManagerss, out (string, string) managerFirstLastNames)
+        {
+            managerFirstLastNames = ("", "");
+            EmployeeHelper employeeHelper = new EmployeeHelper();
+            Console.WriteLine("Enter Number Of managers:\n");
+            string numberOfManagers = Console.ReadLine();
+            int numOfManagers = employeeHelper.CheckNumOfManagers(numOfManagerss, numberOfManagers);
+            if (numOfManagers < 0)
+            {
+                managerFirstLastNames = ("", "");
+                return -1;
+            }
+            string managerFirstName = employeeHelper.CheckName(Console.ReadLine());
+            string managerLastName = employeeHelper.CheckName(Console.ReadLine());
+
+            managerFirstLastNames = (managerFirstName, managerLastName);
+            return numOfManagers;
+        }
+
         public string EnterProjectEmployee(List<Project> projects)
         {
             
@@ -197,6 +272,67 @@ namespace ConsoleApp1.View.EmployeeView
             }
         }
 
-        
+        public bool IsValidRangeIdsNums(List<int> managerIds, int inputManagerId)
+        {
+            int count = 0;
+            for (int i = 0; i < managerIds.Count; i++)
+            {
+                if (managerIds[i] == inputManagerId)
+                {
+                    count = count + 1;
+                    
+                }
+            }
+            if (count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool IsManagerIdExists(List<int> selectedManagerIds, int managerId)
+        {
+            int count = 0;
+            for (int i = 0; i < selectedManagerIds.Count; i++)
+            {
+                if (managerId == selectedManagerIds[i])
+                {
+                    count = count + 1;
+                    
+                }
+            }
+            if (count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public void ShowAllAvailableIds(List<int> mngrIds)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("All Available ids are :\n");
+            for (int i = 0; i < mngrIds.Count; i++)
+            {
+                Console.WriteLine($"Id {i} -> {mngrIds[i]}");
+            }
+            Console.ResetColor();
+        }
+
+        public void ShowMngrIdsMustBeNumeric(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            message = "Manager Id must be numeric value try again :\n";
+            Console.WriteLine(message);
+            Console.ResetColor();
+        }
+
+
     }
 }

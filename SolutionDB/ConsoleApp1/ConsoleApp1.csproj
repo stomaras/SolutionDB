@@ -70,8 +70,8 @@
     <Compile Include="Validations\EmployeeValidations\EmployeeHelper.cs" />
     <Compile Include="View\EmployeeView\IPrintEmployee.cs" />
     <Compile Include="View\EmployeeView\PrintEmployee.cs" />
-    <Compile Include="View\Manager\IPrintManager.cs" />
-    <Compile Include="View\Manager\PrintManager.cs" />
+    <Compile Include="View\ManagerView\IPrintManager.cs" />
+    <Compile Include="View\ManagerView\PrintManager.cs" />
     <Compile Include="View\Per\IPrintPer.cs" />
     <Compile Include="View\Per\PrintPer.cs" />
     <Compile Include="View\ProjectView\IPrintProject.cs" />

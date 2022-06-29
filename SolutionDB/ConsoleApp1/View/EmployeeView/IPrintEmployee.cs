@@ -21,5 +21,9 @@ namespace ConsoleApp1.View.EmployeeView
 
         void EmployeeCreatedSuccessfully(Employee employee);
 
+        int EnterManagersOfEmployees(int numOfManagers, out (string, string) managerFirstLastNames);
+
+        List<int> EnterManagerIds(List<int> managerIds, int numOfManagers);
+
     }
 }
