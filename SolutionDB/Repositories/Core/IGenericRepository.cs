@@ -11,7 +11,7 @@ namespace Repositories.Core
     {
         IEnumerable<T> GetAll();
 
-        IEnumerable<T> GetById(object id);
+        T GetById(object id);
 
         void Insert(T obj);
 

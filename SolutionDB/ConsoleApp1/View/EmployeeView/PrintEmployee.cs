@@ -27,6 +27,22 @@ namespace ConsoleApp1.View.EmployeeView
             {
                 Console.WriteLine($"\t\t\t{employee.Project.ProjectName}");
             }
+            List<Manager> managers = (List<Manager>)employee.Managers;
+            Console.WriteLine($"\t\t Managers:\n");
+            if (managers == null)
+            {
+                Console.WriteLine($"\t\t\t No Managers Yet");
+            }
+            else
+            {
+                foreach (var manager in managers)
+                {
+                  
+                    Console.WriteLine($"\t\t\tManager {{ Full Name: {manager.FirstName} {manager.LastName}, with main subject {manager.Subject}, with Salary {manager.Salary} }}");
+                    
+                }
+            }
+
             Console.ResetColor();
         }
 
@@ -87,58 +103,8 @@ namespace ConsoleApp1.View.EmployeeView
 
         public List<int> EnterManagerIds(List<int> managerIds, int numOfManagers)
         {
-            List<int> mngrIdsReturn = new List<int>();
-            for (int i = 0; i < numOfManagers; i++)
-            {
-                Console.WriteLine("Enter Manager id:\n");
-                string managerId = Console.ReadLine();
-                bool isValidRange = false;
-                bool added = false;
-                bool isNumeric = false;
-                int numOfManagersInput = -1;
-                int numericValue = -1;
-                int managerIdInt = -1;
-                
-                while (!isValidRange || !added || !isNumeric)
-                {
-                    isNumeric = int.TryParse(managerId, out numericValue);
-                    if (isNumeric)
-                    {
-                        managerIdInt = numericValue;
-                        Func<List<int>, int ,bool> isValidRangeIds = IsValidRangeIdsNums;
-                        isValidRange = isValidRangeIds.Invoke(managerIds,numericValue);
-                        if (isValidRange)
-                        {
-                            Func<List<int>, int, bool> isAdded = IsManagerIdExists;
-                            added = isAdded.Invoke(mngrIdsReturn,managerIdInt);
-                            if (added)
-                            {
-                                Console.WriteLine("Managers already selected select other one!");
-                            }
-                            else
-                            {
-                                mngrIdsReturn.Add(managerIdInt);   
-                            }
-                        }
-                        else
-                        {
-                            Action<List<int>> showAvailableIds = ShowAllAvailableIds;
-                            showAvailableIds.Invoke(managerIds);
-                            managerId = Console.ReadLine();
-                        }
-                    }
-                    else
-                    {
-                        string message = "";
-                        Action<string> idMustBeNumeric = ShowMngrIdsMustBeNumeric;
-                        idMustBeNumeric.Invoke(message);
-                        managerId = Console.ReadLine();
-                    }
 
-                }
-                
-            }
-            return mngrIdsReturn;
+            return null;
         }
 
         public int EnterManagersOfEmployees(int numOfManagerss, out (string, string) managerFirstLastNames)

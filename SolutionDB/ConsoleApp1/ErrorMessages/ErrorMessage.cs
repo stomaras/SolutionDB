@@ -15,6 +15,36 @@ namespace ConsoleApp1.ErrorMessages
             Console.ResetColor();
         }
 
+        public static void NumberOfManagersMustBeNumericValue()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Number of Managers Must Be A Numeric Value try again:\n");
+            Console.ResetColor();
+        }
+
+        public static void ManagerIdMustBeANumber()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Number of manager id must be a number:\n");
+            Console.ResetColor();
+        }
+
+        public static void ManagerAlreadyAdded(int managerId)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Manager with id {managerId} already added try again:\n");
+            Console.ResetColor();
+
+        }
+
+        public static void InValidManagerIdRange(int min, int max)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Invalid manager id range:\n");
+            Console.WriteLine($"Valid Manager Id Range is {min} - {max}");
+            Console.ResetColor();
+        }
+
         public static void InValidEmployeeIdToSeeDetails(List<int> employeeIds)
         {
             Console.ForegroundColor = ConsoleColor.Red;

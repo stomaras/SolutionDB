@@ -24,6 +24,8 @@ namespace ConsoleApp1.Controller
             companyUnit = new UnitOfWork(catalogos);
         }
 
+        
+
         public void CreateEmployees()
         {
             try
@@ -34,25 +36,10 @@ namespace ConsoleApp1.Controller
                 List<Manager> managers = GetManagers();
                 List<string> projectsTitles = GetAllProjectTitles(projects);
                 List<int> projectIds = GetAllProjectIds(projects);
-                List<string> managerFirstNames = GetManagerFirstNames(managers);
-                List<string> managersLastNames = GetManagerLastNames(managers);
                 List<int> managerIds = GetManagerIds(managers);
-
-                int numOfManagers = managers.Count;
-                Console.WriteLine("Enter number of Managers:\n");
-                string numOfManagerss = Console.ReadLine();
-
-                int managersCount = empHelp.CheckNumOfManagers(numOfManagers, numOfManagerss);
-                if (managersCount != -1)
-                {
-                    
-                    List<int> managersofEmployees = pr.EnterManagerIds(managerIds, managersCount);
-                }
-                else
-                {
-                    List<Manager> managersToEmployee = null;
-                }
                 
+                int numOfManagers = managers.Count;
+                List<Manager> managersOfEmployee = GetManagersOfEmployee(numOfManagers, managerIds ,managers);
                 
 
                 (string, string, DateTime, DateTime, Enum, double) employee = ("","",DateTime.Now,DateTime.Now,Country.greece, 0.00);
@@ -69,8 +56,11 @@ namespace ConsoleApp1.Controller
                    HireDate = employee.Item4,
                    Country = (Country)employee.Item5,
                    Salary = employee.Item6,
-                   Project = project
+                   Project = project,
+                   Managers = managersOfEmployee
                 };
+
+                companyUnit.Employees.Insert(employee1);
 
                 pr.EmployeeCreatedSuccessfully(employee1);
 
@@ -210,6 +200,62 @@ namespace ConsoleApp1.Controller
                 managerIds.Add(manager.ManagerId);
             }
             return managerIds;
+        }
+
+        public void SuccessNumberOfManagers(int numOfManagerss)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            if (numOfManagerss == 1)
+            {
+                Console.WriteLine($"Employee will have {numOfManagerss} manager");
+            }
+            else
+            {
+                Console.WriteLine($"Employee will have {numOfManagerss} managers");
+            }
+            Console.ResetColor();
+        }
+
+        public List<Manager> GetManagersOfEmployees(List<int> managersOfEmployees)
+        {
+            List<Manager> managers = new List<Manager>();
+            for (int i = 0; i < managersOfEmployees.Count; i++)
+            {
+                var manager = companyUnit.Managers.GetById(managersOfEmployees[i]);
+                managers.Add(manager);
+            }
+            return managers;
+        }
+
+        public List<Manager> GetManagersOfEmployee(int numOfManagers,List<int> managerIds,List<Manager> managers)
+        {
+            EmployeeHelper empHelp = new EmployeeHelper();
+            Console.WriteLine("Enter number of Managers:\n");
+            Console.WriteLine($"Number of Managers must be among 1 - {numOfManagers}");
+            int numOfManagerss = empHelp.CheckNumericValue(Console.ReadLine());
+
+            List<int> managersOfEmployeeIds = new List<int>();
+            List<Manager> managersOfEmployees = new List<Manager>();
+            if (numOfManagerss <= numOfManagers && numOfManagerss > 0)
+            {
+                SuccessNumberOfManagers(numOfManagerss);
+                managersOfEmployeeIds = empHelp.CalculateManagersOfEmployee(managerIds, numOfManagerss);
+                managersOfEmployees = GetManagersOfEmployees(managersOfEmployeeIds);
+            }
+            else
+            {
+                FailNumberOfManagers();
+                managersOfEmployeeIds = null;
+                managersOfEmployees = null;
+            }
+            return managersOfEmployees;
+        }
+
+        public void FailNumberOfManagers()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("This Employee does not have managers yet!");
+            Console.ResetColor();
         }
 
 

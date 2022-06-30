@@ -37,14 +37,15 @@ namespace Repositories.Persistance
             return list;
         }
 
-        public IEnumerable<T> GetById(object id)
+        public T GetById(object id)
         {
-            throw new NotImplementedException();
+            return table.Find(id);
         }
 
         public void Insert(T obj)
         {
-            table.Add(obj);
+            db.Entry(obj).State = EntityState.Added;
+            Save();
         }
 
         public void Save()
