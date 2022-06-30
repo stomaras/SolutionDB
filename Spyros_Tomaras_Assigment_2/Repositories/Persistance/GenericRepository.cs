@@ -50,7 +50,8 @@ namespace Repositories.Persistance
 
         public void Update(T obj)
         {
-            throw new NotImplementedException();
+            db.Entry(obj).State = EntityState.Modified;
+            db.SaveChanges();
         }
     }
 }
