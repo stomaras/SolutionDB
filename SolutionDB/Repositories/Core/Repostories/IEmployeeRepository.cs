@@ -19,6 +19,8 @@ namespace Repositories.Core.Repostories
 
         Employee GetAllEmployeesPerProjectPerManagerById(int? id);
 
+        void Add(Employee emp, List<int> managerIds);
+
 
 
     }

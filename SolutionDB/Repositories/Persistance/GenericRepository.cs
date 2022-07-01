@@ -23,7 +23,8 @@ namespace Repositories.Persistance
 
         public void Add(T obj)
         {
-            throw new NotImplementedException();
+            db.Entry(obj).State = EntityState.Added;
+            db.SaveChanges();
         }
 
         public void Delete(object id)

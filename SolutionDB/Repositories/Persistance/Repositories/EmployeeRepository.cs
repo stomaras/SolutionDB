@@ -19,6 +19,21 @@ namespace Repositories.Persistance.Repositories
            
         }
 
+        public void Add(Employee emp, List<int> managerIds)
+        {
+            foreach (var id in managerIds)
+            {
+                var manager = db.Managers.Find(id);
+                if (manager != null)
+                {
+                    emp.Managers.Add(manager);
+                }
+            }
+
+            db.Entry(emp).State = EntityState.Added;
+            db.SaveChanges();
+        }
+
         public IEnumerable<Employee> EmployeesWithProjects()
         {
             var groups = table.Include(x => x.Project).ToList();

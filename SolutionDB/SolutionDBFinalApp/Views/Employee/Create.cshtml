@@ -16,36 +16,43 @@
         @Html.LabelFor(m => m.FirstName)
         @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Give your first name" } })
     </div>
+    @Html.ValidationMessageFor(m=>m.FirstName, "", new { @class = "text-danger"})
 
     <div class="form-group">
         @Html.LabelFor(m => m.LastName)
         @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Give your last name" } })
     </div>
+    @Html.ValidationMessageFor(m=>m.LastName, "", new { @class = "text-danger"})
 
     <div class="form-group">
         @Html.LabelFor(m => m.HireDate)
         @Html.EditorFor(m => m.HireDate, new { htmlAttributes = new { @class = "form-control", type = "date", placeholder = "Give Hire Date" } })
     </div>
+    @Html.ValidationMessageFor(m=>m.HireDate, "", new {@class = "text-danger"})
 
     <div class="form-group">
         @Html.LabelFor(m => m.DateOfBirth)
         @Html.EditorFor(m => m.DateOfBirth, new { htmlAttributes = new { @class = "form-control", type = "date", placeholder = "Give Birth Date" } })
     </div>
+    @Html.ValidationMessageFor(m=>m.DateOfBirth, "", new {@class = "text-danger"})
 
     <div class="form-group">
         @Html.LabelFor(m => m.Salary)
         @Html.EditorFor(m => m.Salary, new { htmlAttributes = new { @class = "form-control", type = "number", placeholder = "Give Salary" } })
     </div>
+    @Html.ValidationMessageFor(m=>m.Salary, "", new {@class = "text-danger"})
 
     <div class="form-group">
         @Html.LabelFor(m => m.Country)
         @Html.EnumDropDownListFor(m => m.Country, new { @class = "form-control" })
     </div>
+    @Html.ValidationMessageFor(m=>m.Country, "", new {@class = "text-danger"})
 
     <div class="form-group">
         @Html.LabelFor(m => m.PhotoUrl)
         @Html.EditorFor(m => m.PhotoUrl, new { htmlAttributes = new { @class = "form-control", type = "url", placeholder = "Give your image" } })
     </div>
+    @Html.ValidationMessageFor(m=>m.PhotoUrl, "", new {@class = "text-danger"})
 
     <div class="form-group">
         <label for="project">Select Project</label>
@@ -72,10 +79,13 @@
     </div>
 
 
-
+    <input class="btn btn-primary" type="submit" value="Create" />
+    
 
 
 
 </form>
+
+<a class="btn btn-success" href="/Employee/index">Go Back</a>
 
 

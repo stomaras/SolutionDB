@@ -5,8 +5,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
+<h2>Index of Employees</h2>
+<br/>
+<br/>
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["message"]
+    </div>
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -24,7 +31,7 @@
         <th>
             @Html.DisplayNameFor(model => model.LastName)
         </th>
-        
+
         <th>
             Hire Date
         </th>
@@ -43,54 +50,55 @@
         <th>Actions</th>
     </tr>
 
-@foreach (var employee in Model) {
-<tr>
-    <td>
-        <img width="90" src="@employee.PhotoUrl" />
-    </td>
-    @if (employee.Project == null)
+    @foreach (var employee in Model)
     {
-        <td>No Project</td>
-    }
-    else
-    {
-        <td>
-            @Html.DisplayFor(modelItem => employee.Project.ProjectName)
-        </td>
-    }
-    <td>
-        @Html.DisplayFor(modelItem => employee.FirstName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => employee.LastName)
-    </td>
-    <td>
-        @employee.HireDate.ToString("d")
-    </td>
-    <td>
-        @employee.DateOfBirth.ToString("d")
-    </td>
-    <td>
-        @employee.Country
-    </td>
-    <td>
-        $ @employee.Salary
-    </td>
-    <td>
-        <ul>
-            @if (employee.Managers.Count == 0)
+        <tr>
+            <td>
+                <img width="90" src="@employee.PhotoUrl" />
+            </td>
+            @if (employee.Project == null)
             {
-                <li>No Managers Yet</li>
+                <td>No Project</td>
             }
             else
             {
-                foreach (var manager in employee.Managers)
-                {
-                    <li>@manager.FirstName</li>
-                }
+                <td>
+                    @Html.DisplayFor(modelItem => employee.Project.ProjectName)
+                </td>
             }
-        </ul>
-    </td>
+            <td>
+                @Html.DisplayFor(modelItem => employee.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => employee.LastName)
+            </td>
+            <td>
+                @employee.HireDate.ToString("d")
+            </td>
+            <td>
+                @employee.DateOfBirth.ToString("d")
+            </td>
+            <td>
+                @employee.Country
+            </td>
+            <td>
+                $ @employee.Salary
+            </td>
+            <td>
+                <ul>
+                    @if (employee.Managers.Count == 0)
+                    {
+                        <li>No Managers Yet</li>
+                    }
+                    else
+                    {
+                        foreach (var manager in employee.Managers)
+                        {
+                            <li>@manager.FirstName</li>
+                        }
+                    }
+                </ul>
+            </td>
 
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = employee.Id }) |
@@ -98,6 +106,6 @@
                 @Html.ActionLink("Delete", "Delete", new { id = employee.Id })
             </td>
         </tr>
-}
+    }
 
 </table>

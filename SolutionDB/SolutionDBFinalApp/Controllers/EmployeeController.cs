@@ -63,13 +63,23 @@ namespace SolutionDBFinalApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Employee employee)
+        public ActionResult Create(Employee employee, List<int> managerIds)
         {
             if (ModelState.IsValid)
             {
-                companyUnit.Employees.Add(employee);
-                db.Employees.Add(employee);
-                db.SaveChanges();
+                if (managerIds == null)
+                {
+                    companyUnit.Employees.Add(employee);
+                    ShowAlert("You have successfully created employee with first name:" + employee.FirstName + "with last name :" + employee.LastName);
+                }
+                else
+                {
+                    companyUnit.Employees.Add(employee, managerIds);
+                    ShowAlert("You have successfully created employee with first name:" + employee.FirstName + "with last name :" + employee.LastName);
+
+                }
+
+
                 return RedirectToAction("Index");
             }
 
