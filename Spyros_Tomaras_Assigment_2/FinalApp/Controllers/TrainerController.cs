@@ -97,13 +97,49 @@ namespace FinalApp.Controllers
             return View(trainer);
         }
 
+        // GET : DELETE
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var trainer = schoolUnitOfWork.Trainers.GetById(id);
+            if (trainer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(trainer);
+        }
 
 
+
+
+
+        // POST : DELETE
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Trainer trainer = schoolUnitOfWork.Trainers.GetById(id);
+            schoolUnitOfWork.Trainers.Delete(trainer);
+            ShowAlert($"Trainer with first name {trainer.FirstName}, with last name {trainer.LastName} deleted successfully");
+            return RedirectToAction("Index");
+        }
 
         [NonAction]
         public void ShowAlert(string message)
         {
             TempData["message"] = message;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                schoolUnitOfWork.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
 

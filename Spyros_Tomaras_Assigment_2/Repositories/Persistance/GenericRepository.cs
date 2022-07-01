@@ -20,9 +20,10 @@ namespace Repositories.Persistance
             db = applicationDbContext;
             table = db.Set<T>();
         }
-        public void Delete(object id)
+        public void Delete(T obj)
         {
-            throw new NotImplementedException();
+            db.Entry(obj).State = EntityState.Deleted;
+            db.SaveChanges();
         }
 
         public IEnumerable<T> GetAll()
