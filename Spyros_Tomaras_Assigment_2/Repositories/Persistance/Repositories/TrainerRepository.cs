@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Entities.Queries;
 using MyDatabase;
 using Repositories.Core.Repositories;
 using System;
@@ -16,5 +17,18 @@ namespace Repositories.Persistance.Repositories
 
         }
 
+        public List<Trainer> FilterTrainers(TrainerSearchQuery trainerSearchQuery, List<Trainer> trainers)
+        {
+            
+
+            if (!string.IsNullOrEmpty(trainerSearchQuery.searchSubject))
+            {
+                trainers = trainers.Where(m => m.Subject.ToUpper().Contains(trainerSearchQuery.searchSubject.Trim().ToUpper())).ToList();
+            }
+
+            return trainers;
+
+
+        }
     }
 }

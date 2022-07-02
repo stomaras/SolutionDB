@@ -1,12 +1,15 @@
 ﻿using Entities;
 using Entities.CustomValidations;
 using Entities.Factory;
+using Entities.Queries;
+using Microsoft.AspNetCore.Mvc;
 using MyDatabase;
 using Repositories.Persistance;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -25,11 +28,16 @@ namespace FinalApp.Controllers
 
 
         // GET: Trainer
-        public ActionResult Index()
+        public ActionResult Index(TrainerSearchQuery trainerSearchQuery)
         {
-            var trainers = schoolUnitOfWork.Trainers.GetAll();
-            return View(trainers);
+            List<Trainer> trainers = (List<Trainer>)schoolUnitOfWork.Trainers.GetAll();
+            // Filtering ....
+
+            var Filtertrainers = schoolUnitOfWork.Trainers.FilterTrainers(trainerSearchQuery, trainers);
+            return View(Filtertrainers);
         }
+
+       
 
         // GET: Trainer Details
         public ActionResult Details(int? id)

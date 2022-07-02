@@ -54,6 +54,7 @@
     <Compile Include="CustomValidations\Helper.cs" />
     <Compile Include="Factory\Factory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\TrainerSearchQuery.cs" />
     <Compile Include="SchoolEntity.cs" />
     <Compile Include="Trainer.cs" />
   </ItemGroup>
