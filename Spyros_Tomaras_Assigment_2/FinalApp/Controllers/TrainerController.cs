@@ -28,12 +28,32 @@ namespace FinalApp.Controllers
 
 
         // GET: Trainer
-        public ActionResult Index(TrainerSearchQuery trainerSearchQuery)
+        public ActionResult Index(TrainerSearchQuery trainerSearchQuery, string sortOrder)
         {
             List<Trainer> trainers = (List<Trainer>)schoolUnitOfWork.Trainers.GetAll();
             // Filtering ....
 
+            ViewBag.currentSubject = trainerSearchQuery.searchSubject;
+
             var Filtertrainers = schoolUnitOfWork.Trainers.FilterTrainers(trainerSearchQuery, trainers);
+
+            // Sorting ...
+            ViewBag.FirstNameSortParam = String.IsNullOrEmpty(sortOrder) ? "FirstNameDesc" : "";
+            ViewBag.LastNameSortParam = sortOrder == "LastNameAsc" ? "LastNameDesc" : "LastNameAsc";
+
+            switch (sortOrder)
+            {
+                case "FirstNameAsc": Filtertrainers = Filtertrainers.OrderBy(x => x.FirstName).ToList();break;
+                case "FirstNameDesc": Filtertrainers = Filtertrainers.OrderByDescending(x => x.FirstName).ToList();break;
+
+                case "LastNameAsc" : Filtertrainers = Filtertrainers.OrderBy(x => x.LastName).ToList();break;
+                case "LastNameDesc" : Filtertrainers = Filtertrainers.OrderByDescending(x => x.LastName).ToList();break;
+
+                default: Filtertrainers = Filtertrainers.OrderBy(x => x.FirstName).ToList();break;
+            }
+
+
+
             return View(Filtertrainers);
         }
 

@@ -3,6 +3,9 @@
     ViewBag.Title = "Index";
 }
 
+@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 <br />
 <br />
@@ -21,7 +24,7 @@
     <br />
 
     <form class="form-group">
-        <input type="text" name="searchSubject" value="" placeholder="Search Subject Title" />
+        <input type="text" name="searchSubject" value="@ViewBag.currentSubject" placeholder="Search Subject Title" />
         <br />
         <input type="submit" value="Search Subject" />
     </form>
@@ -30,9 +33,9 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Subject</th>
+                <th>@Html.ActionLink("First Name","Index","Trainer", new { sortOrder = ViewBag.FirstNameSortParam}, null)</th>
+                <th>@Html.ActionLink("Last Name", "Index", "Trainer", new { sortOrder = ViewBag.LastNameSortParam}, null)</th>
+                <th>@Html.ActionLink("Subject", "Index", "Trainer", new { sortOrder = ViewBag.SubjectSortParam})</th>
                 <th>Actions</th>
             </tr>
         </thead>
