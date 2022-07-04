@@ -141,6 +141,19 @@ namespace ConsoleApp1.View.EmployeeView
 
         }
 
+        public string EnterProjectEmployeeToEdit(List<Project> projects)
+        {
+            List<string> projectTitles = new List<string>();
+            foreach (var pro in projects)
+            {
+                projectTitles.Add(pro.ProjectName);
+            }
+            PrintService.ShowProjectTitles(projectTitles);
+            Console.WriteLine("Enter Employee New Project Name If You Want:\n");
+            string projectName = Console.ReadLine();
+            return projectName;
+        }
+
         public void ShowEmployeeDetails(Employee employee)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -299,6 +312,117 @@ namespace ConsoleApp1.View.EmployeeView
             Console.ResetColor();
         }
 
+        
 
+        public void EnterEmployeeToEditAvailableOptions(List<Employee> employees)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\t\t All Available Employees To Edit are:\n");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            foreach (var emp in employees)
+            {
+                if (emp.Project == null)
+                {
+                    Console.WriteLine($"\t\t\t Employee {{ Id : {emp.Id} First Name : {emp.FirstName}, Last Name : {emp.LastName}, Age {emp.Age} , Hire Date {emp.HireDate}, Birth Date {emp.DateOfBirth}, Country {emp.Country}, Project : No Project }}");
+                }
+                else
+                {
+                    Console.WriteLine($"\t\t\t Employee {{ Id : {emp.Id} First Name : {emp.FirstName}, Last Name : {emp.LastName}, Age {emp.Age} , Hire Date {emp.HireDate}, Birth Date {emp.DateOfBirth}, Country {emp.Country}, Project : {emp.Project.ProjectName} }}");
+                }                
+               
+                Console.WriteLine($"\t\t\t\t Managers :\n");
+                if (emp.Managers.Count == 0)
+                {
+                    Console.WriteLine("$\t\t\t\t\t No managers \n");
+                }
+                else
+                {
+                    foreach (var manager in emp.Managers)
+                    {
+                        Console.WriteLine($"\t\t\t\t\t\t Manager {{ First Name: {manager.FirstName}, Manager Last Name: {manager.LastName}, Salary: {manager.Salary} }}\n");
+                    }
+                }
+                
+            }
+            Console.ResetColor();
+        }
+
+        public void EnterEmployeeIdToEdit()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Enter Employee ID to Edit:\n");
+            Console.ResetColor();
+        }
+
+        public Employee EnterEmployeeDetailsToEdit(bool toEdit)
+        {
+            if (!toEdit)
+            {
+                return null;
+            }
+            else
+            {
+                EmployeeHelper employeeHelper = new EmployeeHelper();
+
+                Console.WriteLine("Edit Employee:\n");
+
+                Console.WriteLine("Enter Employee First Name:\n");
+                string firstName = employeeHelper.CheckName(Console.ReadLine());
+
+                Console.WriteLine("Enter Employee Last Name:\n");
+                string lastName = employeeHelper.CheckName(Console.ReadLine());
+
+                Console.WriteLine("Enter Employee Day Of Birth:\n");
+                int dayOfBirth = employeeHelper.CheckDay(Console.ReadLine());
+
+                Console.WriteLine("Enter Employee Month Of Birth:\n");
+                int monthOfBirth = employeeHelper.CheckMonth(Console.ReadLine());
+
+                Console.WriteLine("Enter Employee Year Of Birth:\n");
+                int yearOfBirth = employeeHelper.CheckYear(Console.ReadLine());
+
+                DateTime dateOfBirth = new DateTime(yearOfBirth, monthOfBirth, dayOfBirth);
+
+                Console.WriteLine("Enter Employee Hire Day:\n");
+                int hireDay = employeeHelper.CheckHireDay(Console.ReadLine());
+
+                Console.WriteLine("Enter Employee Hire Month:\n");
+                int hireMonth = employeeHelper.CheckHireMonth(Console.ReadLine());
+
+                Console.WriteLine("Enter Employee Hire Year:\n");
+                int hireYear = employeeHelper.CheckHireYear(Console.ReadLine());
+
+                DateTime hireDate = new DateTime(hireYear, hireMonth, hireDay);
+
+                Console.WriteLine("Enter Country of Employee:\n");
+                string country = Console.ReadLine();
+                string countryin = employeeHelper.CheckCountry(country).ToLower();
+                Country inputCountry = (Country)Enum.Parse(typeof(Country), countryin);
+
+                Console.WriteLine("Enter Salary of Employee: \n");
+                string salary = Console.ReadLine();
+                double salaryValid = employeeHelper.CheckValidSalary(salary);
+
+                Employee employee = new Employee()
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    DateOfBirth = dateOfBirth,
+                    HireDate = hireDate,
+                    Country = inputCountry,
+                    Salary = salaryValid,
+                };
+
+                return employee;
+            }
+        }
+
+        public void NoEmployeeToEdit()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("There are No Employees To Edit:\n");
+            Console.ResetColor();
+        }
     }
 }

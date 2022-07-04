@@ -64,6 +64,7 @@ namespace ConsoleApp1
                         case Choice.ReadingEmployeesPerProjectPerManager: employeeController.ReadEmployeesPerProjectPerManager();break;
                         case Choice.EmployeeDetails: employeeController.ReadEmployeeDetails();break;
                         case Choice.CreateEmployee: employeeController.CreateEmployees();break;
+                        case Choice.EditEmployee: employeeController.EditEmployees();break;
                         default: employeeController.ErrorService();break;
                     }
 

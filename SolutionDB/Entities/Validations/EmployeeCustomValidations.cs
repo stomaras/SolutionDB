@@ -72,46 +72,46 @@ namespace Entities.Validations
             }
         }
 
-        public static ValidationResult ValidateSalary(int salary, ValidationContext context)
-        {
-            double numericValue;
-            bool isValidDoubleNumber = false;
-            bool isValidRange = false;
-            double inputSalary = -1.0;
-            string alertMessageErrors = "";
-            if (salary < 0)
-            {
-                alertMessageErrors = CustomSalaryNullError(context);
-                return new ValidationResult(alertMessageErrors, new List<string> { context.MemberName });
-            }
+        //public static ValidationResult ValidateSalary(int salary, ValidationContext context)
+        //{
+        //    double numericValue;
+        //    bool isValidDoubleNumber = false;
+        //    bool isValidRange = false;
+        //    double inputSalary = -1.0;
+        //    string alertMessageErrors = "";
+        //    if (salary < 0)
+        //    {
+        //        alertMessageErrors = CustomSalaryNullError(context);
+        //        return new ValidationResult(alertMessageErrors, new List<string> { context.MemberName });
+        //    }
 
-            isValidDoubleNumber = double.TryParse(salary, out numericValue);
-            if (isValidDoubleNumber)
-            {
-                inputSalary = numericValue;
+        //    isValidDoubleNumber = double.TryParse(salary, out numericValue);
+        //    if (isValidDoubleNumber)
+        //    {
+        //        inputSalary = numericValue;
 
-                Func<double, bool> IsValidSalary = ValidSalaryRange;
-                if (IsValidSalary.Invoke(inputSalary))
-                {
-                    return ValidationResult.Success;
-                }
-                else
-                {
-                    Func<double> SalaryUpperBound = SalaryUpperBounds;
-                    double salaryUpperBound = SalaryUpperBound.Invoke();
-                    Func<double> SalaryLowerBound = SalaryLowerBounds;
-                    double salaryLowerBound = SalaryLowerBound.Invoke();
-                    alertMessageErrors = CustomSalaryOuterBounds(context, salaryLowerBound, salaryUpperBound);
-                    return new ValidationResult(alertMessageErrors, new List<string> { context.MemberName });
-                }
+        //        Func<double, bool> IsValidSalary = ValidSalaryRange;
+        //        if (IsValidSalary.Invoke(inputSalary))
+        //        {
+        //            return ValidationResult.Success;
+        //        }
+        //        else
+        //        {
+        //            Func<double> SalaryUpperBound = SalaryUpperBounds;
+        //            double salaryUpperBound = SalaryUpperBound.Invoke();
+        //            Func<double> SalaryLowerBound = SalaryLowerBounds;
+        //            double salaryLowerBound = SalaryLowerBound.Invoke();
+        //            alertMessageErrors = CustomSalaryOuterBounds(context, salaryLowerBound, salaryUpperBound);
+        //            return new ValidationResult(alertMessageErrors, new List<string> { context.MemberName });
+        //        }
 
-            }
-            else
-            {
-                alertMessageErrors = CustomSalaryMustBeDouble(context);
-                return new ValidationResult(alertMessageErrors, new List<string> { context.MemberName });
-            }
-        }
+        //    }
+        //    else
+        //    {
+        //        alertMessageErrors = CustomSalaryMustBeDouble(context);
+        //        return new ValidationResult(alertMessageErrors, new List<string> { context.MemberName });
+        //    }
+        //}
 
 
 

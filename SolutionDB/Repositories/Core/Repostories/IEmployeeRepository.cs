@@ -21,6 +21,7 @@ namespace Repositories.Core.Repostories
 
         void Add(Employee emp, List<int> managerIds);
 
+        void Edit(Employee emp, Employee newEmp);
 
 
     }

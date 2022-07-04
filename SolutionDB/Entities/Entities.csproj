@@ -60,6 +60,7 @@
     <Compile Include="Project.cs" />
     <Compile Include="ProjectUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validations\EmployeeConsoleValidations.cs" />
     <Compile Include="Validations\EmployeeCustomValidations.cs" />
   </ItemGroup>
   <ItemGroup>

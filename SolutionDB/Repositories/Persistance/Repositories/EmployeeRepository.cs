@@ -34,6 +34,44 @@ namespace Repositories.Persistance.Repositories
             db.SaveChanges();
         }
 
+        public void Edit(Employee emp, Employee newEmp)
+        {
+            if (emp == null)
+            {
+                throw new ArgumentException("Emp Not Found");
+            }
+            // Step 1 Mapping
+            emp.FirstName = newEmp.FirstName;
+            emp.LastName = newEmp.LastName;
+            emp.Salary = newEmp.Salary;
+            emp.DateOfBirth = newEmp.DateOfBirth;
+            emp.HireDate = newEmp.HireDate;
+            emp.Country = newEmp.Country;
+            emp.ProjectId = newEmp.ProjectId;
+
+            // Step 2 Clear all managers from employee tale
+            emp.Managers.Clear();
+            db.SaveChanges();
+
+            // Step 3 Update with the news, make use of managerIds of new Emp
+            if (newEmp.Managers.Count != 0)
+            {
+                foreach (var mngr in newEmp.Managers)
+                {
+                    int managerID = mngr.ManagerId;
+                    var manager = db.Managers.Find(managerID);
+                    if (manager != null)
+                    {
+                        emp.Managers.Add(manager);
+                    }
+                }
+            }
+
+            db.Entry(emp).State = EntityState.Modified;
+            db.SaveChanges();
+            
+        }
+
         public IEnumerable<Employee> EmployeesWithProjects()
         {
             var groups = table.Include(x => x.Project).ToList();

@@ -2,6 +2,7 @@
 using ConsoleApp1.View.EmployeeView;
 using Entities;
 using Entities.Enums;
+using Entities.Validations;
 using MyDatabase;
 using Repositories.Persistance;
 using System;
@@ -24,7 +25,46 @@ namespace ConsoleApp1.Controller
             companyUnit = new UnitOfWork(catalogos);
         }
 
-        
+        public void EditEmployees()
+        {
+            try
+            {
+                List<Employee> employees = (List<Employee>)companyUnit.Employees.EmployeesWithProjectsWithManagers();
+                List<Project> projects = (List<Project>)companyUnit.Projects.GetAll();
+                List<Manager> managers = (List<Manager>)companyUnit.Managers.GetAll();
+                List<int> employeesIds = companyUnit.Employees.GetAllEmployeesIds(employees);
+                List<int> managerIds = companyUnit.Managers.GetManagersById(managers);
+                EmployeeConsoleValidations employeeConsoleValidations = new EmployeeConsoleValidations();
+                PrintEmployee pr = new PrintEmployee();
+                pr.EnterEmployeeToEditAvailableOptions(employees);
+                pr.EnterEmployeeIdToEdit();
+                int employeeId = employeeConsoleValidations.EnterIdOfEmployeeToEdit();
+                Employee employeeToEdit = employeeConsoleValidations.EmployeeToEdit(employees, employeeId);
+                bool toEdit = CheckEmployeeToEditMessage(employeeToEdit);
+                Employee newEmployee = pr.EnterEmployeeDetailsToEdit(toEdit);
+                if (newEmployee != null)
+                {
+                    string projectName = pr.EnterProjectEmployeeToEdit(projects);
+                    Project newProject = companyUnit.Projects.GetProjectByTitle(projectName);
+                    List<Manager> newManagers = GetManagersOfEmployee(managers.Count, managerIds, managers);
+                    newEmployee = new Employee()
+                    {
+                        Project = newProject,
+                        Managers = newManagers
+                    };
+                    companyUnit.Employees.Edit(employeeToEdit, newEmployee);
+                }
+                else
+                {
+                    pr.NoEmployeeToEdit();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
 
         public void CreateEmployees()
         {
@@ -182,6 +222,11 @@ namespace ConsoleApp1.Controller
             return (List<Manager>)companyUnit.Managers.GetAll();
         }
 
+        public List<Employee> GetEmployees()
+        {
+            return (List<Employee>)companyUnit.Employees.GetAll();
+        }
+
         public List<string> GetAllProjectTitles(List<Project> projects)
         {
             return (List<string>)companyUnit.Projects.GetProjectTitles(projects);
@@ -256,6 +301,45 @@ namespace ConsoleApp1.Controller
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("This Employee does not have managers yet!");
             Console.ResetColor();
+        }
+
+        public bool CheckEmployeeToEditMessage(Employee employeeToEdit)
+        {
+            if (employeeToEdit == null)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("No Employee To Edit:\n");
+                Console.ResetColor();
+                return false;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Employee To Edit:\n");
+                if (employeeToEdit.Project == null)
+                {
+                    Console.WriteLine($"Employee {{ with id {employeeToEdit.Id}, with first name {employeeToEdit.FirstName}, with last name {employeeToEdit.LastName}, with age {employeeToEdit.Salary}, with country {employeeToEdit.Country}, with hire date {employeeToEdit.HireDate}, with birth date {employeeToEdit.DateOfBirth}, with project : No Project  }}");
+                    
+                }
+                else
+                {
+                    Console.WriteLine($"Employee {{ with id {employeeToEdit.Id}, with first name {employeeToEdit.FirstName}, with last name {employeeToEdit.LastName}, with age {employeeToEdit.Salary}, with country {employeeToEdit.Country}, with hire date {employeeToEdit.HireDate}, with birth date {employeeToEdit.DateOfBirth}, with project : {employeeToEdit.Project.ProjectName} }}");
+                }
+                Console.WriteLine($"Managers:\n");
+                if (employeeToEdit.Managers.Count == 0)
+                {
+                    Console.WriteLine($"\t\t Manager : No Managers");
+                }
+                else
+                {
+                    foreach (var manager in employeeToEdit.Managers)
+                    {
+                        Console.WriteLine($"\t\t Manager with first name {manager.FirstName}, with last name {manager.LastName}, with salary {manager.Salary}, with Subject {manager.Subject}");
+                    }
+                }
+                Console.ResetColor();
+                return true;
+            }
         }
 
 

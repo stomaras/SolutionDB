@@ -25,5 +25,14 @@ namespace ConsoleApp1.View.EmployeeView
 
         List<int> EnterManagerIds(List<int> managerIds, int numOfManagers);
 
+        void EnterEmployeeToEditAvailableOptions(List<Employee> employees);
+
+        void EnterEmployeeIdToEdit();
+
+        Employee EnterEmployeeDetailsToEdit(bool toEdit);
+
+        string EnterProjectEmployeeToEdit(List<Project> projects);
+
+        void NoEmployeeToEdit();
     }
 }

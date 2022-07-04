@@ -13,12 +13,12 @@ namespace ConsoleApp1.Enums
         ReadingEmployeesPerProjectPerManager,
         EmployeeDetails,
         CreateEmployee,
+        EditEmployee,
         CreateProjects,
         CreateManagers,
         DeleteEmployees,
         DeleteProjects,
         DeleteManagers,
-        UpdateEmployees,
         UpdateProjects,
         UpdateManagers,
         Exit
